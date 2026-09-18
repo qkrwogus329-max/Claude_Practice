@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: "실패하는 테스트 없이는 운영 코드를 작성하지 않는다"는 철칙 기반 TDD(Red-Green-Refactor)로 상세설계(DES-ID) 산출물을 Python 3.14 구현 코드로 옮기고, CLAUDE.md의 품질 게이트(순환복잡도/함수길이/중복코드/주석비율/네이밍)를 오픈소스 도구(radon, pylint)로 검증하기 위한 기준과 절차를 제공한다. 테스트 함수에는 기법/긍정·부정 케이스/목적을 Doxygen 형식으로 남긴다. `ENG-SWE4-001`/`002`(정식 단위시험 산출물)는 다루지 않는다. "구현", "코딩", "TDD로 개발"을 요청받았을 때 사용한다.
+description: "실패하는 테스트 없이는 운영 코드를 작성하지 않는다"는 철칙 기반 TDD(Red-Green-Refactor)로 상세설계(DES-ID) 산출물을 Python 3.14 구현 코드로 옮기고, CLAUDE.md의 품질 게이트(순환복잡도/함수길이/중복코드/주석비율/네이밍)를 오픈소스 도구(radon, pylint)로 검증하기 위한 기준과 절차를 제공한다. 이 프로젝트의 단위 테스트는 TDD로 대체하며 Branch 커버리지 100%, 테스트 성공률 100%가 필수다. 테스트 함수에는 기법/긍정·부정 케이스/목적을 Doxygen 형식으로 남긴다. `ENG-SWE4-001`/`002`(정식 단위시험 문서 자체)는 작성하지 않는다. "구현", "코딩", "TDD로 개발"을 요청받았을 때 사용한다.
 ---
 
 # TDD 스킬 (구현 단계)
@@ -22,12 +22,12 @@ Python/unittest와 이 프로젝트의 추적성·품질 게이트 요구에 맞
   의존성 SBOM FOSS 라이선스 목록 템플릿.xlsx`(실제 산출물: `ENG-SBOM-001`)을 갱신한다.
   의존성 변경이 없으면 이번 작업에서 SBOM을 건드리지 않는다.
 
-> **범위 밖 (중요)**: `WP_Templates/Engineering/SoftwareUnitVerification/`의
-> `TPL-SWE4-001`(SW 단위시험 명세서)/`TPL-SWE4-002`(SW 단위시험 결과서, 실제 산출물
-> `ENG-SWE4-001`/`ENG-SWE4-002`)는 **정식 SWE.4 단위검증 단계의 산출물이며 이 스킬에서
-> 작성하지 않는다** — 이는 이후 별도의 테스트 단계/에이전트가 담당한다. 다만 나중에
-> 재작업 없이 매핑될 수 있도록, 이 스킬로 작성하는 unittest 테스트는 §8의 추적 태그
-> 규칙(`@testid`/`@technique`/`@case`, 파일·메서드 명명 규칙)을 따른다.
+> **범위 확정 (CLAUDE.md "단위 테스트 지침")**: 이 프로젝트는 단위 테스트를 별도
+> 산출물로 만들지 않고 **TDD로 대체한다** — 이 스킬의 Red-Green-Refactor 개발자 테스트가
+> 곧 단위 테스트다. `WP_Templates/Engineering/SoftwareUnitVerification/`의
+> `TPL-SWE4-001`/`TPL-SWE4-002`(정식 SWE.4 단위시험 명세서/결과서 양식) 문서 자체는
+> 작성하지 않지만, §8의 추적 태그 규칙(`@testid`/`@technique`/`@case`, 파일·메서드 명명
+> 규칙)을 따라 필요 시 그 열에 재작업 없이 매핑할 수 있게 한다.
 
 > **교육용 자료 안내**: 이 저장소는 교육용 가상 프로젝트(VJ-ECL-2026)이며
 > (`WP_Templates/PRC-TPL-001_표준 산출물 양식 등록부.xlsx` 명시), PC/SIL·Web 증거만
@@ -126,13 +126,16 @@ Python/unittest와 이 프로젝트의 추적성·품질 게이트 요구에 맞
 - [ ] 목은 불가피한 경우에만 사용했고, 실제 동작을 검증한다
 - [ ] 경계값과 오류 조건(긍정/부정 케이스)을 모두 다뤘다
 - [ ] §6의 품질 게이트를 모두 통과했다
+- [ ] Branch 커버리지 100%를 달성했다(§6)
+- [ ] 테스트 성공률 100%다(실패·에러 0건)
 - [ ] §7의 Doxygen 태그(구현 함수·테스트 함수 모두)를 남겼고 §8의 추적 정보를 갱신했다
 
 체크리스트를 전부 만족하지 못하면 TDD를 건너뛴 것이다 — 처음부터 다시 시작한다.
 
-## 6. 품질 게이트와 오픈소스 도구 (CLAUDE.md "구현 지침" — 반드시 준수)
+## 6. 품질 게이트와 오픈소스 도구 (CLAUDE.md "구현/단위 테스트 지침" — 반드시 준수)
 
-각 게이트는 **함수 단위**로 측정한다(주석 비율 포함).
+각 게이트는 **함수 단위**로 측정한다(주석 비율 포함). Branch 커버리지와 테스트 성공률은
+**테스트 스위트 전체 단위**로 측정한다.
 
 | 게이트 | 기준 | 도구/명령 |
 |---|---|---|
@@ -141,6 +144,21 @@ Python/unittest와 이 프로젝트의 추적성·품질 게이트 요구에 맞
 | 중복 코드 | 8줄 이상 중복 시 위반(7줄까지 허용) | `pylint --enable=duplicate-code` (`.pylintrc`의 `min-similarity-lines=8`) |
 | 주석 비율 | 함수별 Doxygen 주석 줄 수 / (주석+순수 코드 줄 수) 20% 이상 | `check_quality_gates.py` |
 | 식별자 | 함수명/변수명 3자 이상 + camelCase | `pylint --enable=invalid-name` (`.pylintrc`의 `*-rgx`) |
+| **Branch 커버리지** | **100% (필수 — 단위 테스트 지침)** | `coverage run --branch -m unittest discover <테스트 경로>` 후 `coverage report -m`/`coverage json` |
+| **테스트 성공률** | **100% (필수 — 단위 테스트 지침)** | 위 `unittest` 실행 결과 실패(failures)·에러(errors) 0건 |
+
+**Branch 커버리지 측정**: 표준 라이브러리가 아니지만 널리 쓰이는 오픈소스 `coverage`
+패키지(`pip install coverage`)를 사용한다.
+
+```bash
+coverage run --branch -m unittest discover -s <테스트 경로>
+coverage report -m --include="<소스 경로>/*"
+```
+
+`coverage report -m`의 `Missing`/`Branch` 열에 남은 항목이 있으면 100% 미달이다 — 그
+분기를 실행하는 테스트 케이스(주로 §3의 부정/경계 케이스)를 추가한다. 모든 파일의
+커버리지가 100%가 될 때까지, 그리고 `unittest` 실행 결과가 전부 통과(성공률 100%)할
+때까지 해당 구현 작업을 완료로 표시하지 않는다.
 
 이 스킬은 `scripts/check_quality_gates.py`를 함께 제공한다.
 
@@ -233,8 +251,10 @@ def test_DES_SWE_001_addValues_raisesOnNegativeInput(self):
   `ENG-SWE4-001`의 "Test ID"/"Test Function"/"Technique" 열에 재작업 없이 옮길 수 있도록
   하기 위함이다.
 - `ENG-TRC-001_양방향 요구사항 추적 매트릭스`(`TPL-TRC-001`)의 **Code** 열(10행부터)을
-  구현 단위(DES-ID)별 소스 파일 경로·함수명으로 갱신한다. **SWE.4 열은 갱신하지 않는다**
-  (범위 밖, §0 참고).
+  구현 단위(DES-ID)별 소스 파일 경로·함수명으로 갱신하고, **단위 테스트는 TDD로
+  대체하므로(§0)** **SWE.4** 열도 함께 `UT-ID`로 갱신한다. `ENG-SWE4-001`/`002` 정식
+  문서 자체는 만들지 않지만, 매트릭스의 SWE.4 열은 이 프로젝트에서 이 스킬이 유일하게
+  채우는 주체다.
 - 새 외부 의존성을 추가했다면 `ENG-SBOM-001`에 Package/Version/Dependency Type/SPDX/
   Evidence Type/Evidence Locator/Distribution/Remark를 기록한다.
 
@@ -252,8 +272,10 @@ def test_DES_SWE_001_addValues_raisesOnNegativeInput(self):
    않는다.
 4. §6의 `check_quality_gates.py`로 매 반복마다 품질 게이트를 확인하고, 위반이 없을 때까지
    수정한다.
-5. §7에 따라 구현 함수와 테스트 함수 모두 Doxygen 태그를 작성하고, §8에 따라 추적 태그·
-   `ENG-TRC-001`의 Code 열, 필요 시 `ENG-SBOM-001`을 갱신한다.
-6. §5의 체크리스트를 모두 만족하는지 확인한다.
-7. 근거 없는 성능 수치, 커버리지, 매핑 관계를 지어내지 않는다. 확인이 필요한 항목은
+5. 모든 함수 계약을 구현한 뒤 §6의 `coverage run --branch`로 Branch 커버리지를 측정하고,
+   100%와 테스트 성공률 100%를 달성할 때까지 부정/경계 케이스를 보완한다.
+6. §7에 따라 구현 함수와 테스트 함수 모두 Doxygen 태그를 작성하고, §8에 따라 추적 태그·
+   `ENG-TRC-001`의 Code/SWE.4 열, 필요 시 `ENG-SBOM-001`을 갱신한다.
+7. §5의 체크리스트를 모두 만족하는지 확인한다.
+8. 근거 없는 성능 수치, 커버리지, 매핑 관계를 지어내지 않는다. 확인이 필요한 항목은
    "확인 필요"로 표시하고 사용자에게 질문한다.
