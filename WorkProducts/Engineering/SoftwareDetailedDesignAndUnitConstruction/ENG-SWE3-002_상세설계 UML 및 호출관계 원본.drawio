@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-09-18T00:00:00.000Z" agent="detailed-designer" version="24.7.17" type="device" copyright="교육용 샘플 | © 2026 Synetics | 과정 밖 이용은 사전 서면 승인 필요">
+  <diagram id="phase1-detailed-design" name="Phase1-DES-Call-Graph">
+    <mxGraphModel dx="1500" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1360" pageHeight="1060" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="ENG-SWE3-002_상세설계 UML 및 호출관계 원본 — Phase 1 구현 단위(DES-ID) 호출관계 (VJ-ECL-2026)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=17;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="30" y="10" width="1050" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= External actors (left) ================= -->
+        <mxCell id="driver" value="Driver&#10;(운전자)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="180" width="150" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="vehicle" value="Vehicle&#10;(차량 신호)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="300" width="150" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= Input Normalization Layer ================= -->
+        <mxCell id="inBoundary" value="입력 정규화층 (Input Normalization Layer)" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;strokeColor=#2F75B5;fillColor=#F5F9FD;fontColor=#17365D;fontSize=13;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="230" y="90" width="230" height="400" as="geometry"/>
+        </mxCell>
+        <mxCell id="in001" value="DES-IN-001&#10;VehicleMotionSignalNormalizer&#10;(ARC-IN-001)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="140" width="190" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="in002" value="DES-IN-002&#10;DriverCommandNormalizer&#10;(ARC-IN-002)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="240" width="190" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="in003" value="DES-IN-003&#10;IgnitionSignalNormalizer&#10;(ARC-IN-003)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#17365D;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="250" y="340" width="190" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= Decision Logic Layer ================= -->
+        <mxCell id="decBoundary" value="결정로직층 (Decision Logic Layer)" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;strokeColor=#2E7D32;fillColor=#F2FBF0;fontColor=#1B5E20;fontSize=13;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="520" y="70" width="260" height="840" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec004" value="DES-DEC-004&#10;DecisionOrchestrator&#10;(ARC-DEC-002)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B5E20;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="115" width="220" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec003" value="DES-DEC-003&#10;RulePriorityRegistry&#10;(ARC-DEC-002)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B5E20;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="200" width="220" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec002" value="DES-DEC-002&#10;«interface» IDecisionRule&#10;(ARC-DEC-002, IF-INT-001)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#FFFDE7;strokeColor=#1B5E20;strokeWidth=2;fontColor=#000000;fontSize=11;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="540" y="285" width="220" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec005" value="DES-DEC-005&#10;CommandProcessor&#10;(ARC-DEC-003, 우선순위 30)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B5E20;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="370" width="220" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec006" value="DES-DEC-006&#10;AutoLockMonitor&#10;(ARC-DEC-004, 우선순위 20)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B5E20;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="455" width="220" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec007" value="DES-DEC-007&#10;IgnitionMonitor&#10;(ARC-DEC-005, 우선순위 10)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B5E20;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="540" width="220" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec001" value="DES-DEC-001&#10;LockStateStore (SSOT)&#10;(ARC-DEC-001)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B5E20;strokeWidth=3;fontColor=#000000;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="540" y="630" width="220" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec008" value="DES-DEC-008&#10;StatusQueryService&#10;(ARC-DEC-006)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1B5E20;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="540" y="715" width="220" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= Output Adaptation Layer ================= -->
+        <mxCell id="outBoundary" value="출력 어댑테이션층 (Output Adaptation Layer)" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeWidth=2;strokeColor=#B36B00;fillColor=#FFF6EC;fontColor=#7A4A00;fontSize=13;fontStyle=1;verticalAlign=top;align=center;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="850" y="90" width="230" height="340" as="geometry"/>
+        </mxCell>
+        <mxCell id="out001" value="DES-OUT-001&#10;ActuatorOutputAdapter&#10;(ARC-OUT-001)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7A4A00;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="870" y="140" width="190" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="out002" value="DES-OUT-002&#10;DisplayHttpAdapter&#10;(ARC-OUT-002)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7A4A00;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="870" y="230" width="190" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="out003" value="DES-OUT-003&#10;StatusSnapshotSerializer&#10;(ARC-OUT-002)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7A4A00;strokeWidth=2;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="870" y="320" width="190" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= External actors (right) ================= -->
+        <mxCell id="actuator" value="Actuator model&#10;(PC/SIL 액추에이터 모델)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="160" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="displayclient" value="Display / Web 시뮬레이터&#10;(HTTP 클라이언트)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D9EAF7;strokeColor=#2F75B5;fontColor=#000000;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="260" width="180" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= 공통 자료형 (DES-COM-001) ================= -->
+        <mxCell id="com001" value="DES-COM-001 — 공통 자료형 모듈(types.py): Door / LockCommand / SystemState / MotionSnapshot / DriverCommand / IgnitionSnapshot / InputValidity / LockStateSnapshot / StatusSnapshot / RuleOutcome / CycleContext&#10;모든 DES-IN-*/DES-DEC-*/DES-OUT-* 단위가 이 모듈의 불변 값 객체를 참조한다(개별 화살표는 표기를 생략함, §4 참조)." style="rounded=1;whiteSpace=wrap;html=1;dashed=1;align=left;verticalAlign=middle;spacing=10;fillColor=#EDE7F6;strokeColor=#5E35B1;fontColor=#311B92;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="940" width="850" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= Edges: external -> input layer ================= -->
+        <mxCell id="e_driver_in002" value="IF-EXT-004" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="driver" target="in002">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_vehicle_in001" value="IF-EXT-001" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;exitX=1;exitY=0.35;entryX=0;entryY=0.5;" edge="1" parent="1" source="vehicle" target="in001">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_vehicle_in003" value="IF-EXT-009(부분)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" edge="1" parent="1" source="vehicle" target="in003">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= Edges: rule -> normalizer (pull, IF-INT-002/003/004) ================= -->
+        <mxCell id="e_dec005_in002" value="IF-INT-003 get_command() (consume)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0;exitY=0.3;entryX=1;entryY=0.5;" edge="1" parent="1" source="dec005" target="in002">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec006_in001" value="IF-INT-002 get_snapshot()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0;exitY=0.3;entryX=1;entryY=0.6;" edge="1" parent="1" source="dec006" target="in001">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec007_in003" value="IF-INT-004 get_snapshot()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="dec007" target="in003">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= Edges: rule/query -> LockStateStore (IF-INT-005) ================= -->
+        <mxCell id="e_dec005_dec001" value="IF-INT-005 set_door_output()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0.3;exitY=1;entryX=0.2;entryY=0;" edge="1" parent="1" source="dec005" target="dec001">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec006_dec001" value="IF-INT-005 set_door_output()/set_input_validity()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="dec006" target="dec001">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec007_dec001" value="IF-INT-005 set_door_output()/set_system_state()/set_input_validity()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0.7;exitY=1;entryX=0.8;entryY=0;" edge="1" parent="1" source="dec007" target="dec001">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec008_dec001" value="IF-INT-005 get_state() (읽기전용)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="dec008" target="dec001">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec004_dec001" value="IF-INT-005 get_state() (사이클 종료 시)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0.15;exitY=1;entryX=0.05;entryY=0;curved=0;" edge="1" parent="1" source="dec004" target="dec001">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="558" y="600"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ================= Edges: orchestrator -> registry -> interface, rules implement interface ================= -->
+        <mxCell id="e_dec004_dec003" value="ordered_rules()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="dec004" target="dec003">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec003_dec002" value="등록 대상 타입 참조" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=1;fontSize=9;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="dec003" target="dec002">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec005_dec002" value="구현(implements)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;fontSize=9;exitX=0.85;exitY=0;entryX=0.85;entryY=1;" edge="1" parent="1" source="dec005" target="dec002">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_dec006_dec002" value="구현(implements)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;fontSize=9;exitX=0.9;exitY=0;entryX=0.95;entryY=1;curved=0;" edge="1" parent="1" source="dec006" target="dec002">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="775" y="350"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_dec007_dec002" value="구현(implements)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=block;endFill=0;fontSize=9;exitX=0.95;exitY=0;entryX=1;entryY=0.9;curved=0;" edge="1" parent="1" source="dec007" target="dec002">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="790" y="318"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ================= Edges: orchestrator -> output / output -> decision ================= -->
+        <mxCell id="e_dec004_out001" value="IF-INT-006 apply_output() (push, 사이클당 1회)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=1;exitY=0.2;entryX=0;entryY=0.5;" edge="1" parent="1" source="dec004" target="out001">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_out002_dec008" value="IF-INT-007 query_status() (pull)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="out002" target="dec008">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_out002_out003" value="serialize(snapshot)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=9;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="out002" target="out003">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= Edges: output layer -> external ================= -->
+        <mxCell id="e_out001_actuator" value="IF-EXT-005" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;exitX=1;exitY=0.4;entryX=0;entryY=0.5;" edge="1" parent="1" source="out001" target="actuator">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_displayclient_out002" value="IF-EXT-006 (HTTP 요청)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=10;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="displayclient" target="out002">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= Forbidden coupling annotation ================= -->
+        <mxCell id="e_forbidden" value="금지: 직접 호출 없음 (레이어 스킵 금지, ENG-SWE2-001 §2(2))" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#C00000;fontColor=#C00000;fontStyle=1;fontSize=10;startArrow=oval;endArrow=oval;startFill=1;endFill=1;curved=0;exitX=1;exitY=0.05;entryX=0;entryY=0.05;" edge="1" parent="1" source="inBoundary" target="outBoundary">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490" y="100"/>
+              <mxPoint x="840" y="100"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ================= Legend ================= -->
+        <mxCell id="legend" value="범례&#10;━━▶ 함수/메서드 호출(정적 의존) 방향 — 화살표는 &quot;호출하는 쪽 → 호출 대상&quot;(§3 상세 호출관계)&#10;┅┅▶ 구현(implements)/타입 참조 관계(IF-INT-001 추상, DIP/OCP)&#10;●┅┅● 금지된 결합(레이어 스킵)&#10;굵은 테두리 = SSOT(단일 진실 공급원, DES-DEC-001)&#10;점선 채움 상자(보라) = 공통 자료형 모듈(DES-COM-001), 모든 단위가 참조" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fillColor=#FFF2CC;strokeColor=#BF9000;fontColor=#000000;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="20" y="620" width="420" height="150" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="footer" value="교육용 샘플 | © 2026 Synetics | 과정 밖 이용은 사전 서면 승인 필요 | VJ-ECL-2026 Phase 1 (REQ-ECL-001~005) | PC/SIL·Web 증거 한정, 실제 ISO 26262 준수·ASIL 달성 주장 없음" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=10;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="30" y="1020" width="1100" height="30" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
