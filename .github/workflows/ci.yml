@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test-and-quality:
+    name: 테스트 및 품질 게이트
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 3.14 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: 품질/커버리지 도구 설치
+        run: pip install radon pylint coverage
+
+      - name: 프로젝트 의존성 설치 (requirements.txt가 있는 경우)
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: 단위 테스트 실행 (CLAUDE.md 단위 테스트 지침 — Branch 커버리지 100%, 성공률 100%)
+        run: |
+          if [ -d tests ]; then
+            coverage run --branch -m unittest discover -s tests
+            coverage report -m --fail-under=100
+          else
+            echo "tests/ 디렉터리가 아직 없어 단위 테스트를 건너뜁니다."
+          fi
+
+      - name: 코드 품질 게이트 검사 (tdd 스킬 — 순환복잡도/함수길이/중복코드/주석비율/네이밍)
+        run: |
+          if [ -d src ]; then
+            python .claude/skills/tdd/scripts/check_quality_gates.py src \
+              --pylintrc .claude/skills/tdd/assets/.pylintrc
+          else
+            echo "src/ 디렉터리가 아직 없어 품질 게이트 검사를 건너뜁니다."
+          fi
+
+      - name: 통합시험 커버리지 검사 (integration-testing 스킬 — 함수/Call 커버리지 100%)
+        run: |
+          if [ -d src ] && [ -d tests/integration ]; then
+            python .claude/skills/integration-testing/scripts/measure_call_coverage.py \
+              --src src --tests tests/integration
+          else
+            echo "src/ 또는 tests/integration/ 이 아직 없어 통합 커버리지 검사를 건너뜁니다."
+          fi
