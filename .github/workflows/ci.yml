@@ -54,3 +54,4 @@ jobs:
           else
             echo "src/ 또는 tests/integration/ 이 아직 없어 통합 커버리지 검사를 건너뜁니다."
           fi
+# 이 워크플로는 PR/커밋마다 자동 실행됩니다.
